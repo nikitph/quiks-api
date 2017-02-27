@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask
 from eve import Eve
 from eve.auth import BasicAuth
@@ -6,7 +8,7 @@ import time
 import os
 
 #!flask/bin/python
-from flask import Flask
+from flask import Blueprint, request, redirect, url_for, g, jsonify
 
 app = Flask(__name__)
 
@@ -42,7 +44,8 @@ def upload_data():
     file = open(filename,"w")
 
     file.write('Hello World')
-    file.write('This is our new text file')
+    print(request)
+    file.write(str(request.form))
     file.close()
 
     #upload temp file
